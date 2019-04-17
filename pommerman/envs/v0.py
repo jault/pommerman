@@ -11,6 +11,7 @@ import time
 from gym import spaces
 from gym.utils import seeding
 import gym
+import random
 
 from .. import characters
 from .. import constants
@@ -163,6 +164,7 @@ class Pomme(gym.Env):
         if self._init_game_state is not None:
             self.set_json_info()
         else:
+            random.seed(23155)
             self._step_count = 0
             self.make_board()
             self.make_items()
@@ -175,6 +177,7 @@ class Pomme(gym.Env):
                 col = pos[1][0]
                 agent.set_start_position((row, col))
                 agent.reset()
+            random.seed()
 
         return self.get_observations()
 

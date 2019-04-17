@@ -225,7 +225,7 @@ class PommeViewer(Viewer):
         height = math.ceil(board_height + (constants.BORDER_SIZE * 2) +
                            (constants.MARGIN_SIZE * 3))
         width = math.ceil(board_height + board_height / 4 +
-                          (constants.BORDER_SIZE * 2) + constants.MARGIN_SIZE)
+                          (constants.BORDER_SIZE * 2) + constants.MARGIN_SIZE*10)
 
         self._height = height
         self._width = width
@@ -362,6 +362,88 @@ class PommeViewer(Viewer):
             group=LAYER_TOP)
         time_label.color = constants.TEXT_COLOR
         text.append(time_label)
+		
+		
+        board_right = self.board_right(x_offset=150)
+        acts = self._agents[0].acts
+        best = int(acts[-1])
+        action = pyglet.text.Label(
+            'Action-Values',
+            font_name='Arial',
+            font_size=10,
+            x=board_right,
+            y=200,
+            batch=self._batch,
+            group=LAYER_TOP)
+        action.color = constants.TEXT_COLOR
+        text.append(action)
+
+        action = pyglet.text.Label(
+            constants.Action.Stop.name + ':  ' + acts[constants.Action.Stop.value],
+            font_name='Arial',
+            font_size=10,
+            x=board_right,
+            y=185,
+            batch=self._batch,
+            group=LAYER_TOP)
+        action.color = constants.TEXT_COLOR if constants.Action.Stop.value != best else constants.TILE_COLOR
+        text.append(action)
+
+        action = pyglet.text.Label(
+            constants.Action.Up.name + ':     ' + acts[constants.Action.Up.value],
+            font_name='Arial',
+            font_size=10,
+            x=board_right,
+            y=170,
+            batch=self._batch,
+            group=LAYER_TOP)
+        action.color = constants.TEXT_COLOR if constants.Action.Up.value != best else constants.TILE_COLOR
+        text.append(action)
+
+        action = pyglet.text.Label(
+            constants.Action.Down.name + ': ' + acts[constants.Action.Down.value],
+            font_name='Arial',
+            font_size=10,
+            x=board_right,
+            y=155,
+            batch=self._batch,
+            group=LAYER_TOP)
+        action.color = constants.TEXT_COLOR if constants.Action.Down.value != best else constants.TILE_COLOR
+        text.append(action)
+
+        action = pyglet.text.Label(
+            constants.Action.Left.name + ':    ' + acts[constants.Action.Left.value],
+            font_name='Arial',
+            font_size=10,
+            x=board_right,
+            y=140,
+            batch=self._batch,
+            group=LAYER_TOP)
+        action.color = constants.TEXT_COLOR if constants.Action.Left.value != best else constants.TILE_COLOR
+        text.append(action)
+
+        action = pyglet.text.Label(
+            constants.Action.Right.name + ':  ' + acts[constants.Action.Right.value],
+            font_name='Arial',
+            font_size=10,
+            x=board_right,
+            y=125,
+            batch=self._batch,
+            group=LAYER_TOP)
+        action.color = constants.TEXT_COLOR if constants.Action.Right.value != best else constants.TILE_COLOR
+        text.append(action)
+
+        action = pyglet.text.Label(
+            constants.Action.Bomb.name + ': ' + acts[constants.Action.Bomb.value],
+            font_name='Arial',
+            font_size=10,
+            x=board_right,
+            y=110,
+            batch=self._batch,
+            group=LAYER_TOP)
+        action.color = constants.TEXT_COLOR if constants.Action.Bomb.value != best else constants.TILE_COLOR
+        text.append(action)
+		
         return text
 
     def render_dead_alive(self):
